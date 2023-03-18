@@ -1,19 +1,23 @@
 import { it } from "vitest";
 import { Brand } from "../helpers/Brand";
 
-type Valid<T> = unknown;
+type Valid<T> = Brand<T, "Valid">;
 
 interface PasswordValues {
   password: string;
   confirmPassword: string;
 }
 
-const validatePassword = (values: PasswordValues) => {
+/**
+ * 💡 You'll need to change this function...
+ */
+const isValidPassword = (
+  values: PasswordValues
+): values is Valid<PasswordValues> => {
   if (values.password !== values.confirmPassword) {
-    throw new Error("Passwords do not match");
+    return false;
   }
-
-  return values;
+  return true;
 };
 
 const createUserOnApi = (values: Valid<PasswordValues>) => {
@@ -29,7 +33,8 @@ it("Should fail if you do not validate the values before calling createUserOnApi
 
 it("Should succeed if you DO validate the values before calling createUserOnApi", () => {
   const onSubmitHandler = (values: PasswordValues) => {
-    const validatedValues = validatePassword(values);
-    createUserOnApi(validatedValues);
+    if (isValidPassword(values)) {
+      createUserOnApi(values);
+    }
   };
 });

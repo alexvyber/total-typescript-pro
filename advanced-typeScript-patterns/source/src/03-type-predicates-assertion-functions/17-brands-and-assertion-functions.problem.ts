@@ -11,28 +11,28 @@ interface PasswordValues {
 /**
  * 💡 You'll need to change this function...
  */
-const isValidPassword = (values: PasswordValues) => {
+function assertIsValidPassword(
+  values: PasswordValues
+): asserts values is Valid<PasswordValues> {
   if (values.password !== values.confirmPassword) {
-    return false;
+    throw new Error("Password is invalid");
   }
-  return true;
-};
+}
 
 const createUserOnApi = (values: Valid<PasswordValues>) => {
   // Imagine this function creates the user on the API
 };
 
-it("Should fail if you do not validate the values before calling createUserOnApi", () => {
+it("Should fail if you do not validate the passwords before calling createUserOnApi", () => {
   const onSubmitHandler = (values: PasswordValues) => {
     // @ts-expect-error
     createUserOnApi(values);
   };
 });
 
-it("Should succeed if you DO validate the values before calling createUserOnApi", () => {
+it("Should succeed if you DO validate the passwords before calling createUserOnApi", () => {
   const onSubmitHandler = (values: PasswordValues) => {
-    if (isValidPassword(values)) {
-      createUserOnApi(values);
-    }
+    assertIsValidPassword(values);
+    createUserOnApi(values);
   };
 });

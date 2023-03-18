@@ -5,12 +5,12 @@ type UserId = Brand<string, "UserId">;
 type PostId = Brand<string, "PostId">;
 
 interface User {
-  id: string;
+  id: UserId;
   name: string;
 }
 
 interface Post {
-  id: string;
+  id: PostId;
   title: string;
   content: string;
 }
@@ -29,13 +29,13 @@ const db: { users: User[]; posts: Post[] } = {
       content: "This is my first post",
     },
   ],
-};
+} as { users: User[]; posts: Post[] };
 
-const getUserById = (id: string) => {
+const getUserById = (id: UserId) => {
   return db.users.find((user) => user.id === id);
 };
 
-const getPostById = (id: string) => {
+const getPostById = (id: PostId) => {
   return db.posts.find((post) => post.id === id);
 };
 

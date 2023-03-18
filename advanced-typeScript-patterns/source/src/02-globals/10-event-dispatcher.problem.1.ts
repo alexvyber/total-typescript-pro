@@ -13,6 +13,22 @@ declare global {
     };
   }
 
+  interface DispatchableEvent {
+    LOG_OUT: {};
+  }
+
+  interface DispatchableEvent {
+    HALF_LOG_OUT: {
+      some: string;
+    };
+  }
+
+  interface DispatchableEvent {
+    UPDATE_USERNAME: {
+      username: string;
+    };
+  }
+
   /**
    * This type converts the DispatchableEvent
    * interface into a union:
@@ -34,4 +50,5 @@ const dispatchEvent = (event: UnionOfDispatchableEvents) => {
 it("Should be able to dispatch a LOG_IN and LOG_OUT event", () => {
   dispatchEvent({ type: "LOG_IN", username: "username", password: "password" });
   dispatchEvent({ type: "LOG_OUT" });
+  dispatchEvent({ type: "HALF_LOG_OUT", some: "" });
 });

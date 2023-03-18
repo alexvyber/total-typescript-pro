@@ -16,7 +16,7 @@ interface NormalUser extends User {
 }
 
 function assertUserIsAdmin(
-  user: NormalUser | AdminUser,
+  user: NormalUser | AdminUser
 ): asserts user is AdminUser {
   if (user.role !== "admin") {
     throw new Error("Not an admin user");
