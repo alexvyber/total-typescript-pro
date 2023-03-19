@@ -1,10 +1,10 @@
-import { F } from "ts-toolbelt";
-import { it } from "vitest";
-import { Equal, Expect } from "../helpers/type-utils";
+import { F } from "ts-toolbelt"
+import { it } from "vitest"
+import { Equal, Expect } from "../helpers/type-utils"
 
 export const narrowFruits = <TFruits extends { name: string; price: number }[]>(
   t: F.Narrow<TFruits>,
-) => t;
+) => t
 
 const fruits = narrowFruits([
   {
@@ -15,7 +15,7 @@ const fruits = narrowFruits([
     name: "banana",
     price: 2,
   },
-]);
+])
 
 type tests = [
   Expect<
@@ -23,21 +23,21 @@ type tests = [
       typeof fruits,
       [
         {
-          name: "apple";
-          price: 1;
+          name: "apple"
+          price: 1
         },
         {
-          name: "banana";
-          price: 2;
+          name: "banana"
+          price: 2
         },
       ]
     >
   >,
-];
+]
 
 it("Should ONLY let you pass an array of fruits", () => {
   const notAllowed = narrowFruits([
     // @ts-expect-error
     "not allowed",
-  ]);
-});
+  ])
+})

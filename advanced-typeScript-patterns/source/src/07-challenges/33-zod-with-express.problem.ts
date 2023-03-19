@@ -1,36 +1,41 @@
-import express, { RequestHandler } from "express";
-import { it } from "vitest";
-import { z, ZodError } from "zod";
-import { Equal, Expect } from "../helpers/type-utils";
+import express, { RequestHandler } from "express"
+import { it } from "vitest"
+import { z, ZodError } from "zod"
+import { Equal, Expect } from "../helpers/type-utils"
 
-const makeTypeSafeHandler = (
+const makeTypeSafeHandler = <
+  QueryReq extends qs.ParsedQs = any,
+  BodyReq extends Record<string, any> = any,
+>(
   config: {
-    query?: z.Schema;
-    body?: z.Schema;
+    query?: z.Schema<QueryReq>
+    body?: z.Schema<BodyReq>
   },
-  handler: RequestHandler
-): RequestHandler => {
+  handler: RequestHandler<any, any, BodyReq, QueryReq>,
+): RequestHandler<any, any, BodyReq, QueryReq> => {
   return (req, res, next) => {
-    const { query, body } = req;
+    const { query, body } = req
     if (config.query) {
       try {
-        config.query.parse(query);
+        config.query.parse(query)
       } catch (e) {
-        return res.status(400).send((e as ZodError).message);
+        return res.status(400).send((e as ZodError).message)
       }
     }
+
     if (config.body) {
       try {
-        config.body.parse(body);
+        config.body.parse(body)
       } catch (e) {
-        return res.status(400).send((e as ZodError).message);
+        return res.status(400).send((e as ZodError).message)
       }
     }
-    return handler(req, res, next);
-  };
-};
 
-const app = express();
+    return handler(req, res, next)
+  }
+}
+
+const app = express()
 
 it("Should make the query AND body type safe", () => {
   app.get(
@@ -44,24 +49,21 @@ it("Should make the query AND body type safe", () => {
           name: z.string(),
         }),
       },
-      (req, res) => {
+      (req, _res) => {
         type tests = [
           Expect<Equal<typeof req.query, { id: string }>>,
-          Expect<Equal<typeof req.body, { name: string }>>
-        ];
-      }
-    )
-  );
-});
+          Expect<Equal<typeof req.body, { name: string }>>,
+        ]
+      },
+    ),
+  )
+})
 
 it("Should default them to any if not passed in config", () => {
   app.get(
     "/users",
     makeTypeSafeHandler({}, (req, res) => {
-      type tests = [
-        Expect<Equal<typeof req.query, any>>,
-        Expect<Equal<typeof req.body, any>>
-      ];
-    })
-  );
-});
+      type tests = [Expect<Equal<typeof req.query, any>>, Expect<Equal<typeof req.body, any>>]
+    }),
+  )
+})

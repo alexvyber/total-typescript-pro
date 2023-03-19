@@ -1,13 +1,8 @@
-import { getAnimatingState } from "fake-animation-lib-solution";
-import { Equal, Expect } from "../helpers/type-utils";
+import { getAnimatingState } from "fake-animation-lib-solution"
+import { Equal, Expect } from "../helpers/type-utils"
 
-const animatingState = getAnimatingState();
+const animatingState = getAnimatingState()
 
 type tests = [
-  Expect<
-    Equal<
-      typeof animatingState,
-      "before-animation" | "animating" | "after-animation"
-    >
-  >
-];
+  Expect<Equal<typeof animatingState, "before-animation" | "animating" | "after-animation">>,
+]

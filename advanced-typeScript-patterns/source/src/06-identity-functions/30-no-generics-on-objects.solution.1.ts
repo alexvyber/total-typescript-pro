@@ -5,10 +5,10 @@
  */
 
 interface ConfigObj<TRoute extends string> {
-  routes: TRoute[];
+  routes: TRoute[]
   fetchers: {
-    [K in TRoute]?: () => any;
-  };
+    [K in TRoute]?: () => any
+  }
 }
 
 export const configObj: ConfigObj<"/" | "/about" | "/contact"> = {
@@ -16,7 +16,7 @@ export const configObj: ConfigObj<"/" | "/about" | "/contact"> = {
   fetchers: {
     // @ts-expect-error
     "/does-not-exist": () => {
-      return {};
+      return {}
     },
   },
-};
+}

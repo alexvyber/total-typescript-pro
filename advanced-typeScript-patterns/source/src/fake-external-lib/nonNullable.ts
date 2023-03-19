@@ -1,2 +1,2 @@
 export const isNonNullable = <T>(value: T): value is NonNullable<T> =>
-  value !== null && value !== undefined;
+  value !== null && value !== undefined

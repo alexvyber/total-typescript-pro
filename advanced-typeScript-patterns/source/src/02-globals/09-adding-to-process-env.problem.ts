@@ -1,7 +1,7 @@
-import { expect, it } from "vitest";
-import { Equal, Expect } from "../helpers/type-utils";
+import { expect, it } from "vitest"
+import { Equal, Expect } from "../helpers/type-utils"
 
-process.env.MY_ENV_VAR = "Hello, world!";
+process.env.MY_ENV_VAR = "Hello, world!"
 
 const requiredServerEnvs = [
   "NODE_ENV",
@@ -10,13 +10,13 @@ const requiredServerEnvs = [
   "SESSION_SECRET",
   "ENCRYPTION_SECRET",
   "MY_ENV_VAR",
-] as const;
+] as const
 
 declare global {
   namespace NodeJS {
     type ProcessEnvType = {
-      [key in typeof requiredServerEnvs[number]]: string;
-    };
+      [key in (typeof requiredServerEnvs)[number]]: string
+    }
 
     interface ProcessEnv extends ProcessEnvType {}
     // interface ProcessEnv {
@@ -26,13 +26,13 @@ declare global {
 }
 
 it("Should be declared as a string", () => {
-  expect(process.env.MY_ENV_VAR).toEqual("Hello, world!");
-});
+  expect(process.env.MY_ENV_VAR).toEqual("Hello, world!")
+})
 
 it("Should NOT have undefined in the type", () => {
-  const myVar = process.env.MY_ENV_VAR;
-  type tests = [Expect<Equal<typeof myVar, string>>];
-});
+  const myVar = process.env.MY_ENV_VAR
+  type tests = [Expect<Equal<typeof myVar, string>>]
+})
 
 /*
 

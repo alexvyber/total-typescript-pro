@@ -1,5 +1,5 @@
-import { expect, it } from "vitest";
-import { Equal, Expect } from "../helpers/type-utils";
+import { expect, it } from "vitest"
+import { Equal, Expect } from "../helpers/type-utils"
 
 /**
  * Clues:
@@ -11,21 +11,21 @@ import { Equal, Expect } from "../helpers/type-utils";
  */
 declare global {
   interface Window {
-    makeGreetingSolution: () => string;
+    makeGreetingSolution: () => string
   }
 }
 
-window.makeGreetingSolution = () => "Hello!";
+window.makeGreetingSolution = () => "Hello!"
 
 it("Should let you call makeGreetingSolution from the window object", () => {
-  expect(window.makeGreetingSolution()).toBe("Hello, world!");
+  expect(window.makeGreetingSolution()).toBe("Hello, world!")
 
-  type test1 = Expect<Equal<typeof window.makeGreetingSolution, () => string>>;
-});
+  type test1 = Expect<Equal<typeof window.makeGreetingSolution, () => string>>
+})
 
 it("Should not be available on globalThis", () => {
   expect(
     // @ts-expect-error
     globalThis.makeGreetingSolution,
-  ).toBe(undefined);
-});
+  ).toBe(undefined)
+})

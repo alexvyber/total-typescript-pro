@@ -13,12 +13,34 @@
  * const config = makeConfigObj(config);
  */
 
-export const configObj = {
+type ConfigObj<Route extends string> = {
+  routes: Route[]
+  fetchers: {
+    [K in Route]?: () => any
+  }
+}
+
+const makeConfigObj = <Route extends string>(config: ConfigObj<Route>) => config
+
+// export const configObj = {
+//   routes: ["/", "/about", "/contact"],
+//   fetchers: {
+//     // @ts-expect-error
+//     "/does-not-exist": () => {
+//       return {}
+//     },
+//   },
+// }
+
+const config2 = makeConfigObj({
   routes: ["/", "/about", "/contact"],
   fetchers: {
     // @ts-expect-error
     "/does-not-exist": () => {
-      return {};
+      return {}
     },
   },
-};
+})
+
+// const arr = ["asdf", "asdfff"]
+// type S = keyof typeof arr[number]

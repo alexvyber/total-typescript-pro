@@ -2,14 +2,14 @@
 // look nice in intellisense.
 
 type ZodString = {
-  min: () => any;
-  max: () => any;
-} & ZodType<string, {}>;
+  min: () => any
+  max: () => any
+} & ZodType<string, {}>
 
 type ZodType<T, ZodDef> = {
-  parse: (input: unknown) => T;
-};
+  parse: (input: unknown) => T
+}
 
-const str: ZodString = {} as any;
+const str: ZodString = {} as any
 
-export {};
+export {}

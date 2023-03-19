@@ -1,4 +1,4 @@
-// import { F } from "ts-toolbelt";
+import { F } from "ts-toolbelt"
 
 /**
  * Clue: F.NoInfer is part of the solution!
@@ -6,32 +6,30 @@
  * You'll need to modify the interface below
  * to get it to work.
  */
-interface FSMConfig<TState extends string> {
-  initial: TState;
+interface FSMConfig<State extends string> {
+  initial: F.NoInfer<State>
   states: Record<
-    TState,
+    State,
     {
-      onEntry?: () => void;
+      onEntry?: () => void
     }
-  >;
+  >
 }
 
-export const makeFiniteStateMachine = <TState extends string>(
-  config: FSMConfig<TState>
-) => config;
+export const makeFiniteStateMachine = <State extends string>(config: FSMConfig<State>) => config
 
 const config = makeFiniteStateMachine({
   initial: "a",
   states: {
     a: {
       onEntry: () => {
-        console.log("a");
+        console.log("a")
       },
     },
     // b should be allowed to be specified!
     b: {},
   },
-});
+})
 
 const config2 = makeFiniteStateMachine({
   // c should not be allowed! It doesn't exist on the states below
@@ -41,5 +39,8 @@ const config2 = makeFiniteStateMachine({
     a: {},
     // b should be allowed to be specified!
     b: {},
+    d: {},
   },
-});
+})
+
+config2.states.a.onEntry?.()

@@ -1,28 +1,28 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
 interface User {
-  id: string;
+  id: string
 }
 
 export class SDK {
-  loggedInUser?: User;
+  loggedInUser?: User
 
   constructor(loggedInUser?: User) {
-    this.loggedInUser = loggedInUser;
+    this.loggedInUser = loggedInUser
   }
 
   // How do we type this assertion function?
-  assertIsLoggedIn() {
+  assertIsLoggedIn(): asserts this is this & { loggedInUser: User } {
     if (!this.loggedInUser) {
-      throw new Error("Not logged in");
+      throw new Error("Not logged in")
     }
   }
 
   createPost(title: string, body: string) {
-    type test1 = Expect<Equal<typeof this.loggedInUser, User | undefined>>;
+    type test1 = Expect<Equal<typeof this.loggedInUser, User | undefined>>
 
-    this.assertIsLoggedIn();
+    this.assertIsLoggedIn()
 
-    type test2 = Expect<Equal<typeof this.loggedInUser, User>>;
+    type test2 = Expect<Equal<typeof this.loggedInUser, User>>
   }
 }

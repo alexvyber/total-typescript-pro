@@ -1,5 +1,5 @@
-import { z } from "zod";
+import { z } from "zod"
 
-type Example = z.ZodType;
+type Example = z.ZodType
 
-const transformer = z.string().transform((s) => Number(s));
+const transformer = z.string().transform(s => Number(s))

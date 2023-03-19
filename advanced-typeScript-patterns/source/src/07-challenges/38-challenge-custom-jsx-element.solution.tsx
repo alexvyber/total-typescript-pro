@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 /**
  * As a bonus, how do we make sure that it has
@@ -9,10 +9,10 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       "custom-solution-element": {
-        children?: React.ReactNode;
-      };
+        children?: React.ReactNode
+      }
     }
   }
 }
 
-const element = <custom-solution-element>hello world</custom-solution-element>;
+const element = <custom-solution-element>hello world</custom-solution-element>

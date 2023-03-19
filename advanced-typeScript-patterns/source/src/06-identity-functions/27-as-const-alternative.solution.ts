@@ -1,7 +1,7 @@
-import { F } from "ts-toolbelt";
-import { Equal, Expect } from "../helpers/type-utils";
+import { F } from "ts-toolbelt"
+import { Equal, Expect } from "../helpers/type-utils"
 
-export const asConst = <T>(t: F.Narrow<T>) => t;
+export const asConst = <T>(t: F.Narrow<T>) => t
 
 /**
  * Now, fruits is typed as:
@@ -19,7 +19,7 @@ const fruits = asConst([
     name: "banana",
     price: 2,
   },
-]);
+])
 
 type tests = [
   Expect<
@@ -27,14 +27,14 @@ type tests = [
       typeof fruits,
       [
         {
-          name: "apple";
-          price: 1;
+          name: "apple"
+          price: 1
         },
         {
-          name: "banana";
-          price: 2;
+          name: "banana"
+          price: 2
         },
       ]
     >
   >,
-];
+]

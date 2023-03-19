@@ -1,12 +1,12 @@
-import _ from "lodash";
-import { expect, it } from "vitest";
-import { doNotExecute, Equal, Expect } from "../helpers/type-utils";
+import _ from "lodash"
+import { expect, it } from "vitest"
+import { doNotExecute, Equal, Expect } from "../helpers/type-utils"
 
 const groupByAge = <T extends { age: number }>(array: T[]) => {
-  const grouped = _.groupBy(array, "age");
+  const grouped = _.groupBy(array, "age")
 
-  return grouped;
-};
+  return grouped
+}
 
 const result = groupByAge([
   {
@@ -21,7 +21,7 @@ const result = groupByAge([
     name: "Mary",
     age: 30,
   },
-]);
+])
 
 it("Should group the items by age", () => {
   expect(result).toEqual({
@@ -41,12 +41,10 @@ it("Should group the items by age", () => {
         age: 30,
       },
     ],
-  });
+  })
 
-  type tests = [
-    Expect<Equal<typeof result, _.Dictionary<{ name: string; age: number }[]>>>,
-  ];
-});
+  type tests = [Expect<Equal<typeof result, _.Dictionary<{ name: string; age: number }[]>>>]
+})
 
 it("Should not let you pass in an array of objects NOT containing age", () => {
   doNotExecute(() => {
@@ -59,6 +57,6 @@ it("Should not let you pass in an array of objects NOT containing age", () => {
         // @ts-expect-error
         name: "Bill",
       },
-    ]);
-  });
-});
+    ])
+  })
+})
