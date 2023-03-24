@@ -1,16 +1,16 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
 type Route =
   | {
-      route: "/";
+      route: "/"
       search: {
-        page: string;
-        perPage: string;
-      };
+        page: string
+        perPage: string
+      }
     }
   | { route: "/about"; search: {} }
   | { route: "/admin"; search: {} }
-  | { route: "/admin/users"; search: {} };
+  | { route: "/admin/users"; search: {} }
 
 /**
  * Here, R represents the individual Route. The lesson here
@@ -19,22 +19,22 @@ type Route =
  * is.
  */
 type RoutesObject = {
-  [R in Route as R["route"]]: R["search"];
-};
+  [R in Route as R["route"]]: R["search"]
+}
 
-type tests = [
+export type tests = [
   Expect<
     Equal<
       RoutesObject,
       {
         "/": {
-          page: string;
-          perPage: string;
-        };
-        "/about": {};
-        "/admin": {};
-        "/admin/users": {};
+          page: string
+          perPage: string
+        }
+        "/about": {}
+        "/admin": {}
+        "/admin/users": {}
       }
     >
   >,
-];
+]

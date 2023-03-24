@@ -1,32 +1,43 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
 interface Attributes {
-  id: string;
-  email: string;
-  username: string;
+  id: string
+  email: string
+  username: string
+  other: number
 }
 
 /**
  * How do we create a type helper that represents a union
  * of all possible combinations of Attributes?
  */
-type MutuallyExclusive<T> = unknown;
 
-type ExclusiveAttributes = MutuallyExclusive<Attributes>;
+type Get<T> = {
+  [key in keyof T]: Record<key, T[key]>
+}[keyof T]
 
-type tests = [
+type R = Get<Attributes>
+type Result = Get<Attributes>
+type MutuallyExclusive<T> = Get<T>
+
+type ExclusiveAttributes = MutuallyExclusive<Attributes>
+
+export type tests = [
   Expect<
     Equal<
       ExclusiveAttributes,
       | {
-          id: string;
+          id: string
         }
       | {
-          email: string;
+          email: string
         }
       | {
-          username: string;
+          username: string
+        }
+      | {
+          other: number
         }
     >
   >,
-];
+]

@@ -1,8 +1,8 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
-type AddRoutePrefix<TRoute extends string> = `/${TRoute}`;
+type AddRoutePrefix<TRoute extends string> = `/${TRoute}`
 
-type tests = [
+export type tests = [
   Expect<Equal<AddRoutePrefix<"">, "/">>,
   Expect<Equal<AddRoutePrefix<"about">, "/about">>,
   Expect<Equal<AddRoutePrefix<"about/team">, "/about/team">>,
@@ -11,4 +11,4 @@ type tests = [
   AddRoutePrefix<boolean>,
   // @ts-expect-error
   AddRoutePrefix<number>,
-];
+]

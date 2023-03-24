@@ -1,3 +1,3 @@
-import { fetch } from "cross-fetch";
+import { fetch } from "cross-fetch"
 
-global.fetch = fetch;
+global.fetch = fetch

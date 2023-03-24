@@ -1,30 +1,30 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
 interface Attributes {
-  id: string;
-  email: string;
-  username: string;
+  id: string
+  email: string
+  username: string
 }
 
 type MutuallyExclusive<T> = {
-  [K in keyof T]: Record<K, T[K]>;
-}[keyof T];
+  [K in keyof T]: Record<K, T[K]>
+}[keyof T]
 
-type ExclusiveAttributes = MutuallyExclusive<Attributes>;
+type ExclusiveAttributes = MutuallyExclusive<Attributes>
 
-type tests = [
+export type tests = [
   Expect<
     Equal<
       ExclusiveAttributes,
       | {
-          id: string;
+          id: string
         }
       | {
-          email: string;
+          email: string
         }
       | {
-          username: string;
+          username: string
         }
     >
   >,
-];
+]

@@ -7,22 +7,22 @@
  */
 type A =
   | {
-      type: "a";
-      a: string;
+      type: "a"
+      a: string
     }
   | {
-      type: "b";
-      b: string;
+      type: "b"
+      b: string
     }
   | {
-      type: "c";
-      c: string;
-    };
+      type: "c"
+      c: string
+    }
 
 /**
  * B is a union, but not a discriminated union.
  */
-type B = "a" | "b" | "c";
+type B = "a" | "b" | "c"
 
 /**
  * C is an enum.
@@ -33,4 +33,4 @@ enum C {
   C = "c",
 }
 
-export {};
+export {}

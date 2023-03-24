@@ -1,24 +1,24 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
 interface Attributes {
-  firstName: string;
-  lastName: string;
-  age: number;
+  firstName: string
+  lastName: string
+  age: number
 }
 
 type AttributeGetters = {
-  [K in keyof Attributes]: () => Attributes[K];
-};
+  [K in keyof Attributes]: () => Attributes[K]
+}
 
-type tests = [
+export type tests = [
   Expect<
     Equal<
       AttributeGetters,
       {
-        firstName: () => string;
-        lastName: () => string;
-        age: () => number;
+        firstName: () => string
+        lastName: () => string
+        age: () => number
       }
     >
   >,
-];
+]

@@ -1,32 +1,53 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
 type Route =
   | {
-      route: "/";
+      route: "/"
       search: {
-        page: string;
-        perPage: string;
-      };
+        page: string
+        perPage: string
+      }
     }
   | { route: "/about"; search: {} }
   | { route: "/admin"; search: {} }
-  | { route: "/admin/users"; search: {} };
+  | { route: "/admin/users"; search: {} }
 
-type RoutesObject = unknown;
+type Result = { [key in Route["route"]]: Extract<Route, { route: key }>["search"] }
+type ResultTwo = {
+  [R in Route as R["route"]]: R["search"]
+}
 
-type tests = [
+type Some = {
+  [key in PropertyKey]: any
+}
+
+export type tests = [
   Expect<
     Equal<
-      RoutesObject,
+      Result,
       {
         "/": {
-          page: string;
-          perPage: string;
-        };
-        "/about": {};
-        "/admin": {};
-        "/admin/users": {};
+          page: string
+          perPage: string
+        }
+        "/about": {}
+        "/admin": {}
+        "/admin/users": {}
       }
     >
   >,
-];
+  Expect<
+    Equal<
+      ResultTwo,
+      {
+        "/": {
+          page: string
+          perPage: string
+        }
+        "/about": {}
+        "/admin": {}
+        "/admin/users": {}
+      }
+    >
+  >,
+]

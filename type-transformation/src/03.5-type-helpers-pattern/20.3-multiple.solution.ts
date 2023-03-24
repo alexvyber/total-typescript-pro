@@ -1,17 +1,17 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
 type CreateDataShape<TData, TError> = {
-  data: TData;
-  error: TError;
-};
+  data: TData
+  error: TError
+}
 
-type tests = [
+export type tests = [
   Expect<
     Equal<
       CreateDataShape<string, TypeError>,
       {
-        data: string;
-        error: TypeError;
+        data: string
+        error: TypeError
       }
     >
   >,
@@ -19,8 +19,8 @@ type tests = [
     Equal<
       CreateDataShape<number, Error>,
       {
-        data: number;
-        error: Error;
+        data: number
+        error: Error
       }
     >
   >,
@@ -28,9 +28,9 @@ type tests = [
     Equal<
       CreateDataShape<boolean, SyntaxError>,
       {
-        data: boolean;
-        error: SyntaxError;
+        data: boolean
+        error: SyntaxError
       }
     >
   >,
-];
+]

@@ -1,34 +1,34 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
 const makeQuery = (
   url: string,
   opts?: {
-    method?: string;
+    method?: string
     headers?: {
-      [key: string]: string;
-    };
-    body?: string;
-  }
-) => {};
+      [key: string]: string
+    }
+    body?: string
+  },
+) => {}
 
-type MakeQueryParameters = Parameters<typeof makeQuery>;
-type FirstArg = Parameters<typeof makeQuery>[0];
-type SecondArg = Parameters<typeof makeQuery>[1];
+type MakeQueryParameters = Parameters<typeof makeQuery>
+type FirstArg = Parameters<typeof makeQuery>[0]
+type SecondArg = Parameters<typeof makeQuery>[1]
 
-type tests = [
+export type tests = [
   Expect<
     Equal<
       MakeQueryParameters,
       [
         url: string,
         opts?: {
-          method?: string;
+          method?: string
           headers?: {
-            [key: string]: string;
-          };
-          body?: string;
-        }
+            [key: string]: string
+          }
+          body?: string
+        },
       ]
     >
-  >
-];
+  >,
+]

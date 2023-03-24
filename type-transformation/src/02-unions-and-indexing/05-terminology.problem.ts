@@ -10,29 +10,29 @@
 
 type A =
   | {
-      type: "a";
-      a: "Some";
+      type: "a"
+      a: "Some"
     }
   | {
-      type: "b";
-      b: "Other";
+      type: "b"
+      b: "Other"
     }
   | {
-      type: "c";
-      c: "More";
-    };
+      type: "c"
+      c: "More"
+    }
 
 function doStuff(a: A) {
   if (a.type === "a") {
-    a.a;
+    a.a
   }
 
   if (a.type === "c") {
-    a.c;
+    a.c
   }
 }
 
-type B = "a" | "b" | "c";
+type B = "a" | "b" | "c"
 
 enum C {
   A = "a",
@@ -40,4 +40,4 @@ enum C {
   C = "c",
 }
 
-export {};
+export {}

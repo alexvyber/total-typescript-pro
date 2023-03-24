@@ -1,12 +1,12 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from "../helpers/type-utils"
 
-type BreadType = "rye" | "brown" | "white";
+type BreadType = "rye" | "brown" | "white"
 
-type Filling = "cheese" | "ham" | "salami";
+type Filling = "cheese" | "ham" | "salami"
 
-type Sandwich = `${BreadType} sandwich with ${Filling}`;
+type Sandwich = `${BreadType} sandwich with ${Filling}`
 
-type tests = [
+export type tests = [
   Expect<
     Equal<
       Sandwich,
@@ -20,5 +20,5 @@ type tests = [
       | "white sandwich with ham"
       | "white sandwich with salami"
     >
-  >
-];
+  >,
+]
