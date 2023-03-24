@@ -120,8 +120,8 @@ export type tests = [
   >,
 ]
 
-const r: ResultTwo = {
-  c: {
-    e: { n: {} },
-  },
-}
+// const r: ResultTwo = {
+//   c: {
+//     e: { n: { obj: {}} },
+//   },
+// }
