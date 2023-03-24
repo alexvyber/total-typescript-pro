@@ -10,12 +10,27 @@ const getServerSideProps = async () => {
   };
 };
 
-type InferPropsFromServerSideFunction = unknown;
+type InferPropsFromServerSideFunction<
+  T extends (...args: any) => any,
+  U = Awaited<ReturnType<T>>
+> = U extends { props: infer P } ? P : never;
+
+type InferPropsFromServerSideFunctionTwo<T> = T extends (
+  ...args: any
+) => Promise<{ props: infer P }>
+  ? P
+  : never;
 
 type tests = [
   Expect<
     Equal<
       InferPropsFromServerSideFunction<typeof getServerSideProps>,
+      { json: { title: string } }
+    >
+  >,
+  Expect<
+    Equal<
+      InferPropsFromServerSideFunctionTwo<typeof getServerSideProps>,
       { json: { title: string } }
     >
   >

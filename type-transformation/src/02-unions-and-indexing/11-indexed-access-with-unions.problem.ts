@@ -9,7 +9,21 @@ export const programModeEnumMap = {
   PLANNED_SELF_DIRECTED: "plannedSelfDirected",
 } as const;
 
-export type IndividualProgram = unknown;
+type OtherSolution = typeof programModeEnumMap[
+  | "ONE_ON_ONE"
+  | "PLANNED_ONE_ON_ONE"
+  | "SELF_DIRECTED"
+  | "PLANNED_SELF_DIRECTED"];
+
+export type IndividualProgram = Exclude<
+  typeof programModeEnumMap[keyof typeof programModeEnumMap],
+  "group" | "announcement"
+>;
+
+export type MoreSolution = typeof programModeEnumMap[Exclude<
+  keyof typeof programModeEnumMap,
+  "GROUP" | "ANNOUNCEMENT"
+>];
 
 type tests = [
   Expect<
@@ -18,4 +32,16 @@ type tests = [
       "1on1" | "selfDirected" | "planned1on1" | "plannedSelfDirected"
     >
   >,
+  Expect<
+    Equal<
+      OtherSolution,
+      "1on1" | "selfDirected" | "planned1on1" | "plannedSelfDirected"
+    >
+  >,
+  Expect<
+    Equal<
+      MoreSolution,
+      "1on1" | "selfDirected" | "planned1on1" | "plannedSelfDirected"
+    >
+  >
 ];

@@ -6,13 +6,19 @@ export const fakeDataDefaults = {
   Float: 1.14,
   Boolean: true,
   ID: "id",
+  Some: {
+    some: "string",
+  },
 };
 
-export type StringType = unknown;
-export type IntType = unknown;
-export type FloatType = unknown;
-export type BooleanType = unknown;
-export type IDType = unknown;
+type Defaults = typeof fakeDataDefaults;
+
+export type StringType = Defaults["String"];
+export type IntType = Defaults["Int"];
+export type FloatType = Defaults["Float"];
+export type BooleanType = Defaults["Boolean"];
+export type IDType = Defaults["ID"];
+export type SomeType = Defaults["Some"];
 
 type tests = [
   Expect<Equal<StringType, string>>,
@@ -20,4 +26,12 @@ type tests = [
   Expect<Equal<FloatType, number>>,
   Expect<Equal<BooleanType, boolean>>,
   Expect<Equal<IDType, string>>,
+  Expect<
+    Equal<
+      SomeType,
+      {
+        some: string;
+      }
+    >
+  >
 ];

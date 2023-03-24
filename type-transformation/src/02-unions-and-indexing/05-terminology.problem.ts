@@ -11,16 +11,26 @@
 type A =
   | {
       type: "a";
-      a: string;
+      a: "Some";
     }
   | {
       type: "b";
-      b: string;
+      b: "Other";
     }
   | {
       type: "c";
-      c: string;
+      c: "More";
     };
+
+function doStuff(a: A) {
+  if (a.type === "a") {
+    a.a;
+  }
+
+  if (a.type === "c") {
+    a.c;
+  }
+}
 
 type B = "a" | "b" | "c";
 
