@@ -1,10 +1,13 @@
 import { it } from "vitest"
 import { Equal, Expect } from "../helpers/type-utils"
 
-function returnWhatIPassInExceptFor1(t: unknown): unknown {
+function returnWhatIPassInExceptFor1(t: 1): 2
+function returnWhatIPassInExceptFor1<T>(t: T): T
+function returnWhatIPassInExceptFor1<T>(t: T | 1): T | 2 {
   if (t === 1) {
     return 2
   }
+
   return t
 }
 

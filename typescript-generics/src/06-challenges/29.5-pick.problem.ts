@@ -1,11 +1,13 @@
 import { expect, it } from "vitest"
 import { Equal, Expect } from "../helpers/type-utils"
 
-const pick = (obj: {}, picked: string[]) => {
+type PrettifyPickReturn<T> = T extends Pick<infer A, infer B> ? { [key in B]: A[key] } : T
+
+const pick = <Obj, Keys extends keyof Obj>(obj: Obj, picked: Array<Keys>) => {
   return picked.reduce((acc, key) => {
     acc[key] = obj[key]
     return acc
-  }, {})
+  }, {} as Pick<Obj, Keys>) as PrettifyPickReturn<Pick<Obj, Keys>>
 }
 
 it("Should pick the keys from the object", () => {

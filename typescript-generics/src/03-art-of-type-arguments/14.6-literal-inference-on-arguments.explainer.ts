@@ -37,6 +37,7 @@ const acceptsValueWithObjectConstraint = <
 const result4 = acceptsValueWithObjectConstraint({ input: "abc" })
 
 const result4WithAsConst = acceptsValueWithObjectConstraint({
+  //  ^?
   input: "abc",
 } as const)
 

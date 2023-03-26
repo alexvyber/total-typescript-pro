@@ -12,5 +12,6 @@ const divElement2 = document.querySelector("div.foo")
 type tests = [
   Expect<Equal<typeof divElement, HTMLDivElement | null>>,
   Expect<Equal<typeof spanElement, HTMLSpanElement | null>>,
+  // @ts-expect-error
   Expect<Equal<typeof divElement2, HTMLDivElement | null>>,
 ]

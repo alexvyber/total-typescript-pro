@@ -6,9 +6,12 @@ const obj = {
   c: 3,
 } as const
 
-type ObjKey = keyof typeof obj
+// type ObjKey = keyof typeof obj
 
-const getObjValue = <TKey extends ObjKey>(key: TKey = "a") => {
+function getObjValue(): (typeof obj)["a"]
+function getObjValue<TKey extends keyof typeof obj>(key: TKey): (typeof obj)[TKey]
+function getObjValue(key: keyof typeof obj = "a") {
+  // if (!key) return obj.a
   return obj[key]
 }
 

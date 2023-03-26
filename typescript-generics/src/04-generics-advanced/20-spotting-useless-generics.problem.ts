@@ -1,7 +1,14 @@
 import { expect, it } from "vitest"
 import { Equal, Expect } from "../helpers/type-utils"
 
-const returnBothOfWhatIPassIn = <T1, T2>(params: { a: T1; b: T2 }): [T1, T2] => {
+const returnBothOfWhatIPassIn = <
+  T extends {
+    a: unknown
+    b: unknown
+  },
+>(
+  params: T,
+): [T["a"], T["b"]] => {
   return [params.a, params.b]
 }
 
@@ -15,3 +22,16 @@ it("Should return a tuple of the properties a and b", () => {
 
   type test1 = Expect<Equal<typeof result, [string, number]>>
 })
+
+// type TupleUnion<U extends string, R extends any[] = []> = {
+//   [S in U]: Exclude<U, S> extends never ? [...R, S] : TupleUnion<Exclude<U, S>, [...R, S]>
+// }[U]
+
+// interface Person {
+//   firstName: string
+//   lastName: string
+//   dob: Date
+//   hasCats: false
+// }
+
+// type keys = TupleUnion<keyof Person>;

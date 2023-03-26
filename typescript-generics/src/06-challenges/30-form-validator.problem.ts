@@ -1,23 +1,27 @@
 import { expect, it } from "vitest"
 import { Equal, Expect } from "../helpers/type-utils"
 
-const makeFormValidatorFactory = (validators: unknown) => (config: unknown) => {
-  return (values: unknown) => {
-    const errors = {} as any
+// type Validators = { [key: string]: (arg: string) => unknown }
 
-    for (const key in config) {
-      for (const validator of config[key]) {
-        const error = validators[validator](values[key])
-        if (error) {
-          errors[key] = error
-          break
+const makeFormValidatorFactory =
+  <VKey extends string>(validators: Record<VKey, (arg: string) => string | void>) =>
+  <CKey extends string>(config: Record<CKey, Array<VKey>>) => {
+    return (values: Record<CKey, string>) => {
+      const errors = {} as Record<CKey, string | undefined>
+
+      for (const key in config) {
+        for (const validator of config[key]) {
+          const error = validators[validator](values[key])
+          if (error) {
+            errors[key] = error
+            break
+          }
         }
       }
-    }
 
-    return errors
+      return errors
+    }
   }
-}
 
 const createFormValidator = makeFormValidatorFactory({
   required: value => {

@@ -6,9 +6,27 @@ interface Events {
     y: number
   }
   focus: undefined
+  hover: [{ do: "stuff"; other: ":sdfa" }, { dontDo: "other stuff" }]
+  other: null
 }
 
-export const sendEvent = (event: keyof Events, ...args: any[]) => {
+type T = [a: string, b: string]
+type Tuple0<EventsType, KeyType extends keyof EventsType> = {
+  [Key in keyof EventsType]: EventsType[KeyType] extends Array<{}>
+    ? [EventsType[KeyType][number]]
+    : EventsType[KeyType]
+}[KeyType]
+
+type O = Tuple0<Events, "hover">
+
+export const sendEvent = <EventKey extends keyof Events>(
+  event: EventKey,
+  ...args: Events[EventKey] extends Array<{}>
+    ? Events[EventKey]
+    : Events[EventKey] extends {}
+    ? [payload: Events[EventKey]]
+    : []
+) => {
   // Send the event somewhere!
 }
 
@@ -40,6 +58,33 @@ it("Should prevent you from passing a second argument when you choose an event w
 
   sendEvent(
     "focus",
+    // @ts-expect-error
+    {},
+  )
+})
+
+it("...", () => {
+  sendEvent("hover", { do: "stuff", other: ":sdfa" }, { dontDo: "other stuff" })
+
+  sendEvent(
+    "hover",
+    // @ts-expect-error
+    {},
+    {},
+  )
+  sendEvent(
+    "hover",
+    { do: "stuff", other: ":sdfa" },
+    // @ts-expect-error
+    {},
+  )
+})
+
+it("...", () => {
+  sendEvent("other")
+
+  sendEvent(
+    "other",
     // @ts-expect-error
     {},
   )

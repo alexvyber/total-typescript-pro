@@ -1,7 +1,11 @@
 import { expect, it } from "vitest"
 import { Equal, Expect } from "../helpers/type-utils"
 
-const makeInfiniteScroll = (params: unknown) => {
+function makeInfiniteScroll<T>(params: {
+  key: keyof T
+  fetchRows: () => Promise<T[]> | T[]
+  initialRows?: T[]
+}) {
   const data = params.initialRows || []
 
   const scroll = async () => {
@@ -21,11 +25,22 @@ it("Should fetch more data when scrolling", async () => {
     fetchRows: () => Promise.resolve([{ id: 1, name: "John" }]),
   })
 
-  await table.scroll()
+  const table2 = makeInfiniteScroll({
+    key: "id",
+    fetchRows: () => [{ id: 1, name: "John" }],
+  })
 
+  const table3 = makeInfiniteScroll({
+    key: "id",
+    fetchRows: async () => [{ id: 1, name: "John" }],
+  })
+
+  await table.scroll()
+  await table.scroll()
   await table.scroll()
 
   expect(table.getRows()).toEqual([
+    { id: 1, name: "John" },
     { id: 1, name: "John" },
     { id: 1, name: "John" },
   ])

@@ -25,7 +25,7 @@ const obj3 = array.reduce((accum: Record<string, { name: string }>, item) => {
   return accum
 }, {})
 
-const obj4 = array.reduce((accum: Record<string, typeof array[number]>, item) => {
+const obj4 = array.reduce((accum: Record<string, (typeof array)[number]>, item) => {
   accum[item.name] = item
   return accum
 }, {})
@@ -33,7 +33,7 @@ const obj4 = array.reduce((accum: Record<string, typeof array[number]>, item) =>
 const obj5 = array.reduce((accum, item) => {
   accum[item.name] = item
   return accum
-}, {} as Record<string, typeof array[number]>)
+}, {} as Record<string, (typeof array)[number]>)
 
 it("Should resolve to an object where name is the key", () => {
   expect(obj).toEqual({

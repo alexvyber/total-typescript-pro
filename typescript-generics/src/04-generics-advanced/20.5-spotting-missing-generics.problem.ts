@@ -1,6 +1,6 @@
 import { Equal, Expect } from "../helpers/type-utils"
 
-const getValue = <TObj>(obj: TObj, key: keyof TObj) => {
+const getValue = <TObj, Key extends keyof TObj>(obj: TObj, key: Key) => {
   return obj[key]
 }
 

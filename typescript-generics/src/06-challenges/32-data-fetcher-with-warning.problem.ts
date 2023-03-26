@@ -1,7 +1,11 @@
 import { expect, it } from "vitest"
 import { Equal, Expect } from "../helpers/type-utils"
 
-const fetchData = async <TResult>(url: string): Promise<TResult> => {
+const fetchData = async <
+  TResult = "❗ You must pass a type argument to fetchData: fetchData<TypeOfYuorData>",
+>(
+  url: string,
+): Promise<TResult> => {
   const data = await fetch(url).then(response => response.json())
   return data
 }
@@ -16,5 +20,9 @@ it("Should fetch data from an API", async () => {
 it("Should force you to add a type annotation with a helpful error message", async () => {
   const data = await fetchData("https://swapi.dev/api/people/1")
 
-  type tests = [Expect<Equal<typeof data, "You must pass a type argument to fetchData">>]
+  type tests = [
+    Expect<
+      Equal<typeof data, "❗ You must pass a type argument to fetchData: fetchData<TypeOfYuorData>">
+    >,
+  ]
 })

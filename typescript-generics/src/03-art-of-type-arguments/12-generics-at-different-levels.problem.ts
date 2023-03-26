@@ -1,7 +1,7 @@
 import { expect, it, describe } from "vitest"
 import { Equal, Expect } from "../helpers/type-utils"
 
-type Config<T> = {
+type Config = {
   rawConfig: {
     featureFlags: {
       homePage: {
@@ -16,11 +16,16 @@ type Config<T> = {
   }
 }
 
-// type Flags<T> = T
+export const getHomePageFeatureFlags = <R>(
+  config: Config,
+  override: (flags: Config["rawConfig"]["featureFlags"]["homePage"]) => R,
+) => {
+  return override(config.rawConfig.featureFlags.homePage)
+}
 
-export const getHomePageFeatureFlags = <T, F>(
-  config: Config<T>,
-  override: (flags: Config<T>["rawConfig"]["featureFlags"]) => F,
+export const getHomePageFeatureFlags2 = <R>(
+  config: Config,
+  override: (flags: Config["rawConfig"]["featureFlags"]["homePage"]) => R,
 ) => {
   return override(config.rawConfig.featureFlags.homePage)
 }
