@@ -11,7 +11,7 @@ Object.assign(window, addAllOfThisToWindow)
 
 declare global {
   type addToWindow = {
-    [key in keyof typeof addAllOfThisToWindow]: typeof addAllOfThisToWindow[key]
+    [key in keyof typeof addAllOfThisToWindow]: (typeof addAllOfThisToWindow)[key]
   }
 
   type StuffToAdd = typeof addAllOfThisToWindow

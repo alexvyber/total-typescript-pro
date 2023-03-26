@@ -1,4 +1,3 @@
-
 module.exports = {
   printWidth: 100,
   semi: false,
@@ -7,5 +6,5 @@ module.exports = {
   useTabs: false,
   trailingComma: "all",
   singleQuote: false,
-  bracketSameLine: true
+  bracketSameLine: true,
 }

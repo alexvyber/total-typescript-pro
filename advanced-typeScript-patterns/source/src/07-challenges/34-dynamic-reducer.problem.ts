@@ -68,7 +68,7 @@ const reducer = new DynamicReducer<State>()
     return Object.fromEntries(
       (
         Object.entries(state) as unknown as Array<
-          [key: keyof typeof state, value: typeof state[keyof typeof state]]
+          [key: keyof typeof state, value: (typeof state)[keyof typeof state]]
         >
       ).map(([key, value]) => [key, value.toUpperCase()]),
     ) as Record<keyof State, string>

@@ -22,8 +22,8 @@ const fruits = narrowFruits([
   },
 ])
 
-type FruitName = typeof fruits[number]["name"]
-type FruitPrice = typeof fruits[number]["price"]
+type FruitName = (typeof fruits)[number]["name"]
+type FruitPrice = (typeof fruits)[number]["price"]
 
 type tests = [
   Expect<

@@ -6,7 +6,7 @@ const frontendToBackendEnumMap = {
   sharedModule: "SHARED_MODULE",
 } as const
 
-type BackendModuleEnum = typeof frontendToBackendEnumMap[keyof typeof frontendToBackendEnumMap]
+type BackendModuleEnum = (typeof frontendToBackendEnumMap)[keyof typeof frontendToBackendEnumMap]
 
 export type tests = [
   Expect<Equal<BackendModuleEnum, "SINGLE_MODULE" | "MULTI_MODULE" | "SHARED_MODULE">>,
