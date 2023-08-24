@@ -17,17 +17,17 @@ import { ReactNode } from "react";
  */
 
 type OptionType = {
-  __brand: "OPTION_TYPE";
+	__brand: "OPTION_TYPE";
 } & ReactNode;
 
 const Option = () => {
-  return (<option></option>) as OptionType;
+	return (<option></option>) as OptionType;
 };
 
 const Select = (props: { children: OptionType }) => {
-  return <select>{props.children}</select>;
+	return <select>{props.children}</select>;
 };
 
 <Select>
-  <Option />
+	<Option />
 </Select>;

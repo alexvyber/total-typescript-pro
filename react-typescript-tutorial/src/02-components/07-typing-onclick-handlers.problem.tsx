@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 interface ButtonProps {
-  className: string;
-  children: React.ReactNode;
+	className: string;
+	children: React.ReactNode;
 }
 
 export const Button = ({ children, className, onClick }: ButtonProps) => {
-  return (
-    <button onClick={onClick} className={className}>
-      {children}
-    </button>
-  );
+	return (
+		<button onClick={onClick} className={className}>
+			{children}
+		</button>
+	);
 };

@@ -10,21 +10,21 @@ type LooseButtonVariant = LooseAutocomplete<ButtonVariant>;
 type LooseAutocomplete<T> = T | (string & {});
 
 const looseAutocomplete = (t: any) => {
-  return "hello";
+	return "hello";
 };
 
 export const icons: LooseIcon[] = [
-  "home",
-  "settings",
-  "about",
-  "any-other-string",
-  // I should get autocomplete if I add a new item here!
+	"home",
+	"settings",
+	"about",
+	"any-other-string",
+	// I should get autocomplete if I add a new item here!
 ];
 
 export const buttonVariants: LooseButtonVariant[] = [
-  "primary",
-  "secondary",
-  "tertiary",
-  "any-other-string",
-  // I should get autocomplete if I add a new item here!
+	"primary",
+	"secondary",
+	"tertiary",
+	"any-other-string",
+	// I should get autocomplete if I add a new item here!
 ];

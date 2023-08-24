@@ -9,40 +9,40 @@ import { ChangeEventHandler } from "react";
  * keys turned to undefined.
  */
 export type InputProps = (
-  | {
-      value: string;
-      onChange: ChangeEventHandler;
-    }
-  | {
-      value?: undefined;
-      onChange?: undefined;
-    }
+	| {
+			value: string;
+			onChange: ChangeEventHandler;
+	  }
+	| {
+			value?: undefined;
+			onChange?: undefined;
+	  }
 ) & {
-  label: string;
+	label: string;
 };
 
 export const Input = ({ label, ...props }: InputProps) => {
-  return (
-    <div>
-      <label>
-        {label}
-        <input {...props} />
-      </label>
-    </div>
-  );
+	return (
+		<div>
+			<label>
+				{label}
+				<input {...props} />
+			</label>
+		</div>
+	);
 };
 
 export const Test = () => {
-  return (
-    <div>
-      <Input label="Greeting" value="Hello" onChange={() => {}} />
-      <Input label="Greeting" />
+	return (
+		<div>
+			<Input label="Greeting" value="Hello" onChange={() => {}} />
+			<Input label="Greeting" />
 
-      {/* @ts-expect-error */}
-      <Input label="Greeting" value="Hello" />
+			{/* @ts-expect-error */}
+			<Input label="Greeting" value="Hello" />
 
-      {/* @ts-expect-error */}
-      <Input label="Greeting" onChange={() => {}} />
-    </div>
-  );
+			{/* @ts-expect-error */}
+			<Input label="Greeting" onChange={() => {}} />
+		</div>
+	);
 };

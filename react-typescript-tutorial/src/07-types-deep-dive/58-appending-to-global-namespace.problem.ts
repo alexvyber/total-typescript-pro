@@ -9,7 +9,7 @@ import { Equal, Expect } from "../helpers/type-utils";
  */
 
 declare global {
-  namespace React {}
+	namespace React {}
 }
 
 type test = Expect<Equal<React.MyInterface, { foo: string }>>;

@@ -8,25 +8,25 @@ import { Equal, Expect } from "../helpers/type-utils";
  * Investigate why this is, and what TFieldValues is being used for.
  */
 const Example1 = () => {
-  const form = useForm({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-    },
-  });
+	const form = useForm({
+		defaultValues: {
+			firstName: "",
+			lastName: "",
+		},
+	});
 
-  return (
-    <form
-      onSubmit={form.handleSubmit((values) => {
-        type test = Expect<
-          Equal<typeof values, { firstName: string; lastName: string }>
-        >;
-      })}
-    >
-      <input {...form.register("firstName")} />
-      <input {...form.register("lastName")} />
-    </form>
-  );
+	return (
+		<form
+			onSubmit={form.handleSubmit((values) => {
+				type test = Expect<
+					Equal<typeof values, { firstName: string; lastName: string }>
+				>;
+			})}
+		>
+			<input {...form.register("firstName")} />
+			<input {...form.register("lastName")} />
+		</form>
+	);
 };
 
 /**
@@ -37,18 +37,18 @@ const Example1 = () => {
  */
 
 const Example2 = () => {
-  const form = useForm();
+	const form = useForm();
 
-  return (
-    <form
-      onSubmit={form.handleSubmit((values) => {
-        type test = Expect<Equal<typeof values, FieldValues>>;
-      })}
-    >
-      <input {...form.register("firstName")} />
-      <input {...form.register("lastName")} />
-    </form>
-  );
+	return (
+		<form
+			onSubmit={form.handleSubmit((values) => {
+				type test = Expect<Equal<typeof values, FieldValues>>;
+			})}
+		>
+			<input {...form.register("firstName")} />
+			<input {...form.register("lastName")} />
+		</form>
+	);
 };
 
 /**
@@ -57,23 +57,23 @@ const Example2 = () => {
  */
 
 type FormValues = {
-  firstName: string;
-  lastName: string;
+	firstName: string;
+	lastName: string;
 };
 
 const Example3 = () => {
-  const form = useForm();
+	const form = useForm();
 
-  return (
-    <form
-      onSubmit={form.handleSubmit((values) => {
-        type test = Expect<Equal<typeof values, FormValues>>;
-      })}
-    >
-      <input {...form.register("firstName")} />
-      <input {...form.register("lastName")} />
-      {/* @ts-expect-error */}
-      <input {...form.register("middleName")} />
-    </form>
-  );
+	return (
+		<form
+			onSubmit={form.handleSubmit((values) => {
+				type test = Expect<Equal<typeof values, FormValues>>;
+			})}
+		>
+			<input {...form.register("firstName")} />
+			<input {...form.register("lastName")} />
+			{/* @ts-expect-error */}
+			<input {...form.register("middleName")} />
+		</form>
+	);
 };

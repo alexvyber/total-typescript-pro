@@ -9,32 +9,32 @@ type Input = "text" | "number" | "password";
  * restricted to only those inputs.
  */
 const COMPONENTS: Record<Input, React.ComponentType<InputProps>> = {
-  text: (props) => {
-    return <input {...props} type="text" />;
-  },
-  number: (props) => {
-    return <input {...props} type="number" />;
-  },
-  password: (props) => {
-    return <input {...props} type="password" />;
-  },
+	text: (props) => {
+		return <input {...props} type="text" />;
+	},
+	number: (props) => {
+		return <input {...props} type="number" />;
+	},
+	password: (props) => {
+		return <input {...props} type="password" />;
+	},
 };
 
 export const Input = (props: { type: Input } & InputProps) => {
-  const Component = COMPONENTS[props.type];
-  return <Component {...props} />;
+	const Component = COMPONENTS[props.type];
+	return <Component {...props} />;
 };
 
 <>
-  <Input
-    type="number"
-    onChange={(e) => {
-      type test = Expect<Equal<typeof e, React.ChangeEvent<HTMLInputElement>>>;
-    }}
-  ></Input>
-  <Input type="text"></Input>
-  <Input type="password"></Input>
+	<Input
+		type="number"
+		onChange={(e) => {
+			type test = Expect<Equal<typeof e, React.ChangeEvent<HTMLInputElement>>>;
+		}}
+	></Input>
+	<Input type="text"></Input>
+	<Input type="password"></Input>
 
-  {/* @ts-expect-error */}
-  <Input type="email"></Input>
+	{/* @ts-expect-error */}
+	<Input type="email"></Input>
 </>;

@@ -2,20 +2,22 @@ import { useState } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
 export function useStateAsObject<T>(): {
-  value: T | undefined;
-  set: React.Dispatch<React.SetStateAction<T | undefined>>;
+	value: T | undefined;
+	set: React.Dispatch<React.SetStateAction<T | undefined>>;
 };
-export function useStateAsObject<T>(initial: T): {
-  value: T;
-  set: React.Dispatch<React.SetStateAction<T>>;
+export function useStateAsObject<T>(
+	initial: T,
+): {
+	value: T;
+	set: React.Dispatch<React.SetStateAction<T>>;
 };
 export function useStateAsObject<T>(initial?: T) {
-  const [value, set] = useState(initial);
+	const [value, set] = useState(initial);
 
-  return {
-    value,
-    set,
-  };
+	return {
+		value,
+		set,
+	};
 }
 
 /**
@@ -24,13 +26,13 @@ export function useStateAsObject<T>(initial?: T) {
 const notUndefined = useStateAsObject({ name: "Matt" });
 
 type ExampleTests = [
-  Expect<Equal<typeof notUndefined.value, { name: string }>>,
-  Expect<
-    Equal<
-      typeof notUndefined.set,
-      React.Dispatch<React.SetStateAction<{ name: string }>>
-    >
-  >,
+	Expect<Equal<typeof notUndefined.value, { name: string }>>,
+	Expect<
+		Equal<
+			typeof notUndefined.set,
+			React.Dispatch<React.SetStateAction<{ name: string }>>
+		>
+	>,
 ];
 
 /**
@@ -39,11 +41,11 @@ type ExampleTests = [
 const hasUndefined = useStateAsObject<number>();
 
 type NumTests = [
-  Expect<Equal<typeof hasUndefined.value, number | undefined>>,
-  Expect<
-    Equal<
-      typeof hasUndefined.set,
-      React.Dispatch<React.SetStateAction<number | undefined>>
-    >
-  >,
+	Expect<Equal<typeof hasUndefined.value, number | undefined>>,
+	Expect<
+		Equal<
+			typeof hasUndefined.set,
+			React.Dispatch<React.SetStateAction<number | undefined>>
+		>
+	>,
 ];

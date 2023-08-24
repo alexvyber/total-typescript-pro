@@ -2,8 +2,8 @@ import { ForwardedRef, forwardRef, useRef } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
 type Props<T> = {
-  data: T[];
-  renderRow: (item: T) => React.ReactNode;
+	data: T[];
+	renderRow: (item: T) => React.ReactNode;
 };
 
 /**
@@ -32,35 +32,35 @@ type Props<T> = {
  * being passed in.
  */
 export const Table = <T,>(
-  props: Props<T>,
-  ref: ForwardedRef<HTMLTableElement>,
+	props: Props<T>,
+	ref: ForwardedRef<HTMLTableElement>,
 ) => {
-  return <table ref={ref} />;
+	return <table ref={ref} />;
 };
 
 const ForwardReffedTable = forwardRef(Table);
 
 const Parent = () => {
-  const tableRef = useRef<HTMLTableElement>(null);
-  const wrongRef = useRef<HTMLDivElement>(null);
-  return (
-    <>
-      <ForwardReffedTable
-        ref={tableRef}
-        data={["123"]}
-        renderRow={(row) => {
-          type test = Expect<Equal<typeof row, string>>;
-          return <div>123</div>;
-        }}
-      />
-      <ForwardReffedTable
-        // @ts-expect-error
-        ref={wrongRef}
-        data={["123"]}
-        renderRow={(row) => {
-          return <div>123</div>;
-        }}
-      />
-    </>
-  );
+	const tableRef = useRef<HTMLTableElement>(null);
+	const wrongRef = useRef<HTMLDivElement>(null);
+	return (
+		<>
+			<ForwardReffedTable
+				ref={tableRef}
+				data={["123"]}
+				renderRow={(row) => {
+					type test = Expect<Equal<typeof row, string>>;
+					return <div>123</div>;
+				}}
+			/>
+			<ForwardReffedTable
+				// @ts-expect-error
+				ref={wrongRef}
+				data={["123"]}
+				renderRow={(row) => {
+					return <div>123</div>;
+				}}
+			/>
+		</>
+	);
 };

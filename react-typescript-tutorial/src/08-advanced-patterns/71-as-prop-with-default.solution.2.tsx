@@ -2,12 +2,12 @@ import { ComponentPropsWithoutRef, ElementType, useRef } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
 export const Link = <T extends ElementType>(
-  props: {
-    as?: T;
-  } & ComponentPropsWithoutRef<ElementType extends T ? "a" : T>,
+	props: {
+		as?: T;
+	} & ComponentPropsWithoutRef<ElementType extends T ? "a" : T>,
 ) => {
-  const { as: Comp = "a", ...rest } = props;
-  return <Comp {...rest}></Comp>;
+	const { as: Comp = "a", ...rest } = props;
+	return <Comp {...rest}></Comp>;
 };
 
 /**
@@ -15,23 +15,23 @@ export const Link = <T extends ElementType>(
  */
 
 const Example1 = () => {
-  return (
-    <>
-      <Link
-        // @ts-expect-error doesNotExist is not a valid prop
-        doesNotExist
-      ></Link>
+	return (
+		<>
+			<Link
+				// @ts-expect-error doesNotExist is not a valid prop
+				doesNotExist
+			></Link>
 
-      <Link
-        // e should be inferred correctly
-        onClick={(e) => {
-          type test = Expect<
-            Equal<typeof e, React.MouseEvent<HTMLAnchorElement>>
-          >;
-        }}
-      ></Link>
-    </>
-  );
+			<Link
+				// e should be inferred correctly
+				onClick={(e) => {
+					type test = Expect<
+						Equal<typeof e, React.MouseEvent<HTMLAnchorElement>>
+					>;
+				}}
+			></Link>
+		</>
+	);
 };
 
 /**
@@ -39,25 +39,25 @@ const Example1 = () => {
  */
 
 const Example2 = () => {
-  return (
-    <>
-      <Link
-        as="button"
-        // @ts-expect-error doesNotExist is not a valid prop
-        doesNotExist
-      ></Link>
+	return (
+		<>
+			<Link
+				as="button"
+				// @ts-expect-error doesNotExist is not a valid prop
+				doesNotExist
+			></Link>
 
-      <Link
-        as="button"
-        // e should be inferred correctly
-        onClick={(e) => {
-          type test = Expect<
-            Equal<typeof e, React.MouseEvent<HTMLButtonElement>>
-          >;
-        }}
-      ></Link>
-    </>
-  );
+			<Link
+				as="button"
+				// e should be inferred correctly
+				onClick={(e) => {
+					type test = Expect<
+						Equal<typeof e, React.MouseEvent<HTMLButtonElement>>
+					>;
+				}}
+			></Link>
+		</>
+	);
 };
 
 /**
@@ -65,24 +65,24 @@ const Example2 = () => {
  */
 
 const Custom = (
-  props: { thisIsRequired: boolean },
-  ref: React.ForwardedRef<HTMLAnchorElement>,
+	props: { thisIsRequired: boolean },
+	ref: React.ForwardedRef<HTMLAnchorElement>,
 ) => {
-  return <a ref={ref} />;
+	return <a ref={ref} />;
 };
 
 const Example3 = () => {
-  return (
-    <>
-      <Link as={Custom} thisIsRequired />
-      <Link
-        as={Custom}
-        // @ts-expect-error incorrectProp should not be allowed
-        incorrectProp
-      />
+	return (
+		<>
+			<Link as={Custom} thisIsRequired />
+			<Link
+				as={Custom}
+				// @ts-expect-error incorrectProp should not be allowed
+				incorrectProp
+			/>
 
-      {/* @ts-expect-error thisIsRequired is not being passed */}
-      <Link as={Custom}></Link>
-    </>
-  );
+			{/* @ts-expect-error thisIsRequired is not being passed */}
+			<Link as={Custom}></Link>
+		</>
+	);
 };

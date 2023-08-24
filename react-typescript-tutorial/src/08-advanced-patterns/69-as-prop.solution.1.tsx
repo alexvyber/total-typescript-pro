@@ -10,8 +10,8 @@ import { Equal, Expect } from "../helpers/type-utils";
 // }[keyof JSX.IntrinsicElements];
 
 export const Wrapper = (props: AsProps) => {
-  const Comp = props.as;
-  return <Comp {...(props as any)}></Comp>;
+	const Comp = props.as;
+	return <Comp {...(props as any)}></Comp>;
 };
 
 /**
@@ -19,25 +19,25 @@ export const Wrapper = (props: AsProps) => {
  */
 
 const Example1 = () => {
-  return (
-    <>
-      <Wrapper
-        as="button"
-        // @ts-expect-error doesNotExist is not a valid prop
-        doesNotExist
-      ></Wrapper>
+	return (
+		<>
+			<Wrapper
+				as="button"
+				// @ts-expect-error doesNotExist is not a valid prop
+				doesNotExist
+			></Wrapper>
 
-      <Wrapper
-        as="button"
-        // e should be inferred correctly
-        onClick={(e) => {
-          type test = Expect<
-            Equal<typeof e, React.MouseEvent<HTMLButtonElement>>
-          >;
-        }}
-      ></Wrapper>
-    </>
-  );
+			<Wrapper
+				as="button"
+				// e should be inferred correctly
+				onClick={(e) => {
+					type test = Expect<
+						Equal<typeof e, React.MouseEvent<HTMLButtonElement>>
+					>;
+				}}
+			></Wrapper>
+		</>
+	);
 };
 
 /**
@@ -45,21 +45,21 @@ const Example1 = () => {
  */
 
 const Example2 = () => {
-  return (
-    <>
-      <Wrapper
-        as="div"
-        // @ts-expect-error doesNotExist is not a valid prop
-        doesNotExist
-      ></Wrapper>
+	return (
+		<>
+			<Wrapper
+				as="div"
+				// @ts-expect-error doesNotExist is not a valid prop
+				doesNotExist
+			></Wrapper>
 
-      <Wrapper
-        as="div"
-        // e should be inferred correctly
-        onClick={(e) => {
-          type test = Expect<Equal<typeof e, React.MouseEvent<HTMLDivElement>>>;
-        }}
-      ></Wrapper>
-    </>
-  );
+			<Wrapper
+				as="div"
+				// e should be inferred correctly
+				onClick={(e) => {
+					type test = Expect<Equal<typeof e, React.MouseEvent<HTMLDivElement>>>;
+				}}
+			></Wrapper>
+		</>
+	);
 };

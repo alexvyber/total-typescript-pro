@@ -1,11 +1,11 @@
 import { Equal, Expect } from "../helpers/type-utils";
 
 declare global {
-  namespace React {
-    interface MyAwesomeSolutionInterface {
-      foo: string;
-    }
-  }
+	namespace React {
+		interface MyAwesomeSolutionInterface {
+			foo: string;
+		}
+	}
 }
 
 /**
@@ -15,15 +15,15 @@ declare global {
  * The power of declaration merging!
  */
 declare global {
-  namespace React {
-    interface MyAwesomeSolutionInterface {
-      bar: string;
-    }
-  }
+	namespace React {
+		interface MyAwesomeSolutionInterface {
+			bar: string;
+		}
+	}
 }
 
 type test = Expect<
-  Equal<React.MyAwesomeSolutionInterface, { foo: string; bar: string }>
+	Equal<React.MyAwesomeSolutionInterface, { foo: string; bar: string }>
 >;
 
 export {};

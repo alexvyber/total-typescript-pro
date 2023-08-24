@@ -13,33 +13,33 @@ type InputProps = React.ComponentProps<"input">;
  * Hint: Record and satisfies will come in handy.
  */
 const COMPONENTS = {
-  text: (props) => {
-    return <input {...props} type="text" />;
-  },
-  number: (props) => {
-    return <input {...props} type="number" />;
-  },
-  password: (props) => {
-    return <input {...props} type="password" />;
-  },
+	text: (props) => {
+		return <input {...props} type="text" />;
+	},
+	number: (props) => {
+		return <input {...props} type="number" />;
+	},
+	password: (props) => {
+		return <input {...props} type="password" />;
+	},
 };
 
 export const Input = (props: unknown) => {
-  const Component = COMPONENTS[props.type];
-  return <Component {...props} />;
+	const Component = COMPONENTS[props.type];
+	return <Component {...props} />;
 };
 
 <>
-  <Input
-    type="number"
-    onChange={(e) => {
-      // e should be properly typed!
-      type test = Expect<Equal<typeof e, React.ChangeEvent<HTMLInputElement>>>;
-    }}
-  ></Input>
-  <Input type="text"></Input>
-  <Input type="password"></Input>
+	<Input
+		type="number"
+		onChange={(e) => {
+			// e should be properly typed!
+			type test = Expect<Equal<typeof e, React.ChangeEvent<HTMLInputElement>>>;
+		}}
+	></Input>
+	<Input type="text"></Input>
+	<Input type="password"></Input>
 
-  {/* @ts-expect-error */}
-  <Input type="email"></Input>
+	{/* @ts-expect-error */}
+	<Input type="email"></Input>
 </>;

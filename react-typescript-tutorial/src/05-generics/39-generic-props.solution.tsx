@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
 interface TableProps<T> {
-  rows: T[];
-  renderRow: (row: T) => ReactNode;
+	rows: T[];
+	renderRow: (row: T) => ReactNode;
 }
 
 /**
@@ -12,42 +12,42 @@ interface TableProps<T> {
  * `renderRow` function.
  */
 export const Table = <T,>(props: TableProps<T>) => {
-  return (
-    <table>
-      <tbody>
-        {props.rows.map((row) => (
-          <tr>{props.renderRow(row)}</tr>
-        ))}
-      </tbody>
-    </table>
-  );
+	return (
+		<table>
+			<tbody>
+				{props.rows.map((row) => (
+					<tr>{props.renderRow(row)}</tr>
+				))}
+			</tbody>
+		</table>
+	);
 };
 
 const data = [
-  {
-    id: 1,
-    name: "John",
-  },
+	{
+		id: 1,
+		name: "John",
+	},
 ];
 
 export const Parent = () => {
-  return (
-    <div>
-      <Table rows={data} renderRow={(row) => <td>{row.name}</td>} />
-      <Table
-        rows={data}
-        renderRow={(row) => {
-          type test = Expect<Equal<typeof row, { id: number; name: string }>>;
-          return (
-            <td>
-              {
-                // @ts-expect-error
-                row.doesNotExist
-              }
-            </td>
-          );
-        }}
-      ></Table>
-    </div>
-  );
+	return (
+		<div>
+			<Table rows={data} renderRow={(row) => <td>{row.name}</td>} />
+			<Table
+				rows={data}
+				renderRow={(row) => {
+					type test = Expect<Equal<typeof row, { id: number; name: string }>>;
+					return (
+						<td>
+							{
+								// @ts-expect-error
+								row.doesNotExist
+							}
+						</td>
+					);
+				}}
+			></Table>
+		</div>
+	);
 };

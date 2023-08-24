@@ -1,15 +1,15 @@
 import { useRef } from "react";
 
 export const Component = () => {
-  const firstOverload = useRef<string>("124123123");
+	const firstOverload = useRef<string>("124123123");
 
-  firstOverload.current = "123j12jhb123jhb";
+	firstOverload.current = "123j12jhb123jhb";
 
-  const secondOverload = useRef<string>(null);
+	const secondOverload = useRef<string>(null);
 
-  secondOverload.current = "Hello";
+	secondOverload.current = "Hello";
 
-  const thirdOverload = useRef<string>();
+	const thirdOverload = useRef<string>();
 
-  return null;
+	return null;
 };

@@ -2,15 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { Equal, Expect } from "../helpers/type-utils";
 
 interface User {
-  fullName: string;
-  job: string;
+	fullName: string;
+	job: string;
 }
 
 const getUser = async (): Promise<User> => {
-  return Promise.resolve({
-    fullName: "Matt Pocock",
-    job: "Developer",
-  });
+	return Promise.resolve({
+		fullName: "Matt Pocock",
+		job: "Developer",
+	});
 };
 
 /**
@@ -31,7 +31,7 @@ useQuery;
  * as the return type of queryFn. Why is that?
  */
 const query1 = useQuery({
-  queryFn: getUser,
+	queryFn: getUser,
 });
 
 // Without initialData, the type of query1.data is User | undefined
@@ -42,11 +42,11 @@ type test1 = Expect<Equal<typeof query1.data, User | undefined>>;
  * has undefined in it. Why is that?
  */
 const query2 = useQuery({
-  queryFn: getUser,
-  initialData: {
-    fullName: "",
-    job: "",
-  },
+	queryFn: getUser,
+	initialData: {
+		fullName: "",
+		job: "",
+	},
 });
 
 // WITH initialData, the type of query.data is just User

@@ -10,26 +10,26 @@ type types = [React.ElementType, React.ComponentType];
  * As well as ComponentType<P>
  */
 export type Example = React.ElementType<{
-  autoPlay?: boolean;
+	autoPlay?: boolean;
 }>;
 
 /**
  * ComponentType
  */
 const FuncComponent = (props: { prop1: string }) => {
-  return null;
+	return null;
 };
 
 class ClassComponent extends React.Component<{
-  prop1: string;
+	prop1: string;
 }> {
-  render(): React.ReactNode {
-    this.props.prop1;
-    return null;
-  }
+	render(): React.ReactNode {
+		this.props.prop1;
+		return null;
+	}
 }
 
 const tests2: Array<React.ComponentType<{ prop1: string }>> = [
-  FuncComponent,
-  ClassComponent,
+	FuncComponent,
+	ClassComponent,
 ];

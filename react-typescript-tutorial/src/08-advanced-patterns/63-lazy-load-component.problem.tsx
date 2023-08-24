@@ -1,7 +1,7 @@
 import { lazy, Suspense, useMemo } from "react";
 
 type Props = {
-  loader: unknown;
+	loader: unknown;
 };
 
 /**
@@ -17,24 +17,24 @@ type Props = {
  * - React.ComponentProps will come in handy, as will React.ComponentType
  */
 function LazyLoad({ loader, ...props }: Props) {
-  const LazyComponent = useMemo(() => lazy(loader), [loader]);
+	const LazyComponent = useMemo(() => lazy(loader), [loader]);
 
-  return (
-    <Suspense fallback={"Loading..."}>
-      <LazyComponent {...props} />
-    </Suspense>
-  );
+	return (
+		<Suspense fallback={"Loading..."}>
+			<LazyComponent {...props} />
+		</Suspense>
+	);
 }
 
 <>
-  <LazyLoad loader={() => import("fake-external-component")} id="123" />
+	<LazyLoad loader={() => import("fake-external-component")} id="123" />
 
-  <LazyLoad
-    loader={() => import("fake-external-component")}
-    // @ts-expect-error number is not assignable to string
-    id={123}
-  />
+	<LazyLoad
+		loader={() => import("fake-external-component")}
+		// @ts-expect-error number is not assignable to string
+		id={123}
+	/>
 
-  {/* @ts-expect-error id is missing! */}
-  <LazyLoad loader={() => import("fake-external-component")} />
+	{/* @ts-expect-error id is missing! */}
+	<LazyLoad loader={() => import("fake-external-component")} />
 </>;

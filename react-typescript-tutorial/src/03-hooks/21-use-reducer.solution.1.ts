@@ -2,27 +2,27 @@ import { useReducer } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
 const reducer = (
-  state: {
-    count: number;
-  },
-  action:
-    | {
-        type: "add";
-        add: number;
-      }
-    | {
-        type: "subtract";
-        subtract: number;
-      }
+	state: {
+		count: number;
+	},
+	action:
+		| {
+				type: "add";
+				add: number;
+		  }
+		| {
+				type: "subtract";
+				subtract: number;
+		  },
 ) => {
-  switch (action.type) {
-    case "add":
-      return { count: state.count + action.add };
-    case "subtract":
-      return { count: state.count - action.subtract };
-    default:
-      throw new Error();
-  }
+	switch (action.type) {
+		case "add":
+			return { count: state.count + action.add };
+		case "subtract":
+			return { count: state.count - action.subtract };
+		default:
+			throw new Error();
+	}
 };
 
 const [state, dispatch] = useReducer(reducer, { count: 0 });

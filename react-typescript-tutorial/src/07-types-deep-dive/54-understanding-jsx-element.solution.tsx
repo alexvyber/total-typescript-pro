@@ -13,7 +13,7 @@ type ClickMeThree = React.ReactNode;
  * 2. What is the return type of this Component?
  */
 const Component = () => {
-  return <div>Hello world</div>;
+	return <div>Hello world</div>;
 };
 
 /**
@@ -27,27 +27,27 @@ const Component = () => {
  * https://stackoverflow.com/questions/39668731/what-typescript-version-is-visual-studio-code-using-how-to-update-it
  */
 const Component2 = (): React.ReactNode => {
-  return <div></div>;
+	return <div></div>;
 };
 
 <>
-  <Component2 />
+	<Component2 />
 </>;
 
 /**
  * 4a. Why does this component NOT error...
  */
 const Component3 = (): React.ReactElement => {
-  return <div></div>;
+	return <div></div>;
 };
 
 <>
-  <Component3 />
+	<Component3 />
 </>;
 
 /**
  * 4b. ...but this one does?
  */
 const Component4 = (): React.ReactElement => {
-  return "hello!";
+	return "hello!";
 };
