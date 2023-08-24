@@ -7,19 +7,19 @@ type GetKeysTuple<
   ? GetKeysTuple<Rest, Param extends "" ? Acc : [...Acc, Param]>
   : Acc
 
-type S = GetKeysTuple<"You have {count} unread messages. {otherCount}! {}moreCount">[number]
-type SS = GetKeysTuple<"Click me!">[number] extends never ? true : false
+type S = GetKeysTuple<"You have {count} unread messages. {otherCount}! {moreCount}"> //[number]
+// type SS = GetKeysTuple<"Click me!">[number] extends never ? true : false
 
-type GetParamKeys<TTranslation extends string> = TTranslation extends ""
-  ? []
-  : TTranslation extends `${string}{${infer Param}}${infer Tail}`
-  ? [Param, ...GetParamKeys<Tail>]
-  : []
+// type GetParamKeys<TTranslation extends string> = TTranslation extends ""
+//   ? []
+//   : TTranslation extends `${string}{${infer Param}}${infer Tail}`
+//   ? [Param, ...GetParamKeys<Tail>]
+//   : []
 
-type GetParamKeysAsUnion<TTranslation extends string> = GetParamKeys<TTranslation>[number]
+// type GetParamKeysAsUnion<TTranslation extends string> = GetParamKeys<TTranslation>[number]
 
 const translate = <
-  TKey extends string,
+  TKey extends keyof Translation,
   Translation extends Record<string, string>,
   DynamicKeysType extends any[] = GetKeysTuple<Translation[TKey]>,
   // Example = [Example: Translation[TKey]],
@@ -38,7 +38,7 @@ const translate = <
 
 const translations = {
   title: "Hello, {name}!",
-  subtitle: "You have {count} unread messages. {otherCount}!",
+  subtitle: "You have {count} unread messages. {otherCount}! {govno}",
   button: "Click me!",
 } as const
 
@@ -50,8 +50,10 @@ it("Should translate a translation without parameters", () => {
 
 it("Should translate a translation WITH parameters", () => {
   const subtitle = translate(translations, "subtitle", {
+    // name: "asdfasdf",
     count: "asdfasdf",
     otherCount: "123123",
+    govno: "asdfasdfasdfd",
   })
 
   expect(subtitle).toEqual("You have 2 unread messages.")

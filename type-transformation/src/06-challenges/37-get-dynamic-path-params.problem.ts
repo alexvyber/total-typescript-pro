@@ -4,6 +4,7 @@ type UserPath = "/users/:id"
 type SomePath = "/users/asdfasdfid/asdfasdf/as/df/asdf/asdf/"
 
 type UserOrganisationPath = "/users/:id/organisations/:organisationId"
+
 type GetIdsTuple<
   T extends string,
   Acc extends string[] = [],
