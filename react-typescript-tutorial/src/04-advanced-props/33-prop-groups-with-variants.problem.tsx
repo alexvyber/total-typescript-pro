@@ -1,5 +1,7 @@
 import { ComponentProps } from "react";
 
+
+
 const buttonPropsMap = {
 	reset: {
 		className: "bg-blue-500 text-white",
@@ -19,7 +21,10 @@ const buttonPropsMap = {
 		// @ts-expect-error
 		illegalProperty: "whatever",
 	},
-};
+} satisfies Record<string, React.ComponentProps<"button">>
+//  satisfies {
+// 	[key in "submit" | "reset" | "next" ]: React.ComponentProps<"button">
+// }
 
 type ButtonProps = {
 	variant: keyof typeof buttonPropsMap;
