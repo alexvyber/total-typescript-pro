@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
-interface TableProps {
-	rows: any[];
-	renderRow: (row: any) => ReactNode;
+interface TableProps<T> {
+	rows: T[];
+	renderRow: (row: T) => ReactNode;
 }
 
 /**
@@ -12,7 +12,7 @@ interface TableProps {
  * generic. It's just `any`. We want to make it generic so that the type of
  * the data is inferred from the `rows` prop.
  */
-export const Table = (props: TableProps) => {
+export function Table<T>(props: TableProps<T>) {
 	return (
 		<table>
 			<tbody>
@@ -22,7 +22,19 @@ export const Table = (props: TableProps) => {
 			</tbody>
 		</table>
 	);
-};
+}
+
+// export const Table = (<T,>(props: TableProps<T>) => {
+// 	return (
+// 		<table>
+// 			<tbody>
+// 				{props.rows.map((row) => (
+// 					<tr>{props.renderRow(row)}</tr>
+// 				))}
+// 			</tbody>
+// 		</table>
+// 	);
+// })
 
 const data = [
 	{

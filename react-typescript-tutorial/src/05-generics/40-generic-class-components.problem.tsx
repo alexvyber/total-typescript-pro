@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
-interface TableProps {
-	rows: any[];
-	renderRow: (row: any) => ReactNode;
+interface TableProps<T> {
+	rows: T[];
+	renderRow: (row: T) => ReactNode;
 }
 
-export class Table extends React.Component<TableProps> {
+export class Table<T> extends React.Component<TableProps<T>> {
 	render(): ReactNode {
 		return (
 			<table>
@@ -48,3 +48,12 @@ export const Parent = () => {
 		</div>
 	);
 };
+
+const some = new (class<const T> {
+	constructor(public readonly something: T) {}
+})("some");
+
+// @ts-expect-error
+some.something = "asdf";
+
+some.something;

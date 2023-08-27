@@ -11,7 +11,6 @@ import { ChangeEventHandler } from "react";
  * 2. Find a way to fix the errors.
  */
 
-
 type InputProps = (
 	| {
 			value: string;
@@ -24,7 +23,6 @@ type InputProps = (
 ) & {
 	label: string;
 };
-
 
 // Record<PropertyKey, never>
 export const Input = ({ label, ...props }: InputProps) => {

@@ -41,8 +41,10 @@ export const Test = () => {
 	);
 };
 
-type AllOrNothing<T extends any> = T | {
-	[key in keyof T]?: undefined
-}
+type AllOrNothing<T extends any> =
+	| T
+	| {
+			[key in keyof T]?: undefined;
+	  };
 
-type OrNothind<T extends any> = T | Partial<Record<keyof T, undefined>>
+type OrNothind<T extends any> = T | Partial<Record<keyof T, undefined>>;
