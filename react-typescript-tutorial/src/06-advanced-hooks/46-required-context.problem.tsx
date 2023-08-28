@@ -14,21 +14,29 @@ import { Equal, Expect } from "../helpers/type-utils";
  *
  * 1. See if you can fix it!
  */
-const createRequiredContext = () => {
-	const context = React.createContext(null);
+
+function assertContext<T>(contextValue: T | null): asserts contextValue is T {
+	if (contextValue === null) {
+		throw new Error("Context value is null");
+	}
+}
+
+function createRequiredContext<T>() {
+	const context = React.createContext<T | null>(null);
 
 	const useContext = () => {
 		const contextValue = React.useContext(context);
 
-		if (contextValue === null) {
-			throw new Error("Context value is null");
-		}
+		assertContext(contextValue);
+		// if (contextValue === null) {
+		// 	throw new Error("Context value is null");
+		// }
 
 		return contextValue;
 	};
 
-	return [useContext, context.Provider];
-};
+	return [useContext, context.Provider] as const;
+}
 
 const [useUser, UserProvider] = createRequiredContext<{
 	name: string;
