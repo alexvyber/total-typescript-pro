@@ -7,6 +7,7 @@
 
 type ClickMe = React.ReactElement;
 type ClickMeToo = JSX.Element;
+type Other = React.JSX.Element;
 type ClickMeThree = React.ReactNode;
 
 /**

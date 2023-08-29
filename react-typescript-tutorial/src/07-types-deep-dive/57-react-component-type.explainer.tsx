@@ -33,3 +33,28 @@ const tests2: Array<React.ComponentType<{ prop1: string }>> = [
 	FuncComponent,
 	ClassComponent,
 ];
+
+type One = React.ElementType<{
+	htmlFor: string;
+}>;
+
+type Two = React.ElementType<{
+	href: string;
+}>;
+
+function Some(props: { title: string }) {
+	return <></>;
+}
+
+function Other(props: { subtitle: string }) {}
+
+type SomeType = React.ComponentType<{ title: string }>;
+
+function HOC(props: { some: number; component: SomeType }) {
+	return <></>;
+}
+
+<>
+	<HOC some={12} component={Some} />
+	<HOC some={12} component={Other} />
+</>;

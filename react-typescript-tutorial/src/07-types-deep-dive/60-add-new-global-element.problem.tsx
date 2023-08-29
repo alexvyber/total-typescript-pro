@@ -10,11 +10,27 @@
  * interface in the JSX namespace.
  */
 
+declare global {
+	namespace React {
+		namespace JSX {
+			interface IntrinsicElements {
+				something: Omit<
+					React.DetailedHTMLProps<
+						React.HTMLAttributes<HTMLElement>,
+						HTMLElement
+					>,
+					"id"
+				> & { id: string };
+			}
+		}
+	}
+}
+
 <>
 	<something id="123"></something>
 
 	{/* @ts-expect-error */}
-	<something></something>
+	<something className="" style={{}} onClick={() => {}}></something>
 
 	{/* @ts-expect-error */}
 	<something id={123}></something>

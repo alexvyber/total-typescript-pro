@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 /**
  * In this example we have a Select component. Through some magic, we're
  * attempting to strongly type the children of the Select component so
@@ -16,18 +14,47 @@ import { ReactNode } from "react";
  * 4. Is what we're attempting to do even possible?
  */
 
-type OptionType = {
-	__brand: "OPTION_TYPE";
-} & ReactNode;
+declare const __brand: unique symbol;
+type Brand<B> = { [__brand]: B };
+type Branded<T, B> = T & Brand<B>;
 
-const Option = () => {
-	return (<option></option>) as OptionType;
-};
+// type OptionType = {
+// 	__brand: "OPTION_TYPE";
+// } & React.ReactNode;
 
-const Select = (props: { children: OptionType }) => {
+type OptionType = Branded<React.ReactNode, "OPTION_TYPE">;
+
+function Option(): OptionType {
+	return (<option></option>) as any;
+}
+
+function renderOption(): OptionType {
+	return (<Option />) as any;
+}
+
+const Select = (props: { children: OptionType | OptionType[] }) => {
 	return <select>{props.children}</select>;
 };
 
-<Select>
-	<Option />
-</Select>;
+<>
+	<div>
+		<Option />
+	</div>
+
+	<Select>
+		{
+			[
+				<Option />,
+				<Option />,
+				<Option />,
+				<Option />,
+				<Option />,
+				<Option />,
+				<Option />,
+				<Option />,
+				<Option />,
+				<Option />,
+			] as OptionType[]
+		}
+	</Select>
+</>;

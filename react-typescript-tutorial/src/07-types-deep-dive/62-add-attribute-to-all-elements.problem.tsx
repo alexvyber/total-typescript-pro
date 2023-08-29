@@ -6,9 +6,18 @@
  * a new attribute to all React elements.
  */
 
+declare global {
+	namespace React {
+		
+		interface DOMAttributes<T> {
+			testId?: string
+		}
+	}
+}
+
 <>
-	<div testId="123" />
-	<audio testId="123" />
+	<div testId="123" id="asdf" />
+	<audio className="" testId="123" />
 	<video testId="123" />
 	<a testId="123" />
 	<abbr testId="123" />
